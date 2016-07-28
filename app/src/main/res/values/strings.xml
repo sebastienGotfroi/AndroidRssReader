@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Rss Reader</string>
+    <string name="intent_share_title">Share!</string>
+    <string name="noFlux">Pas de flux rss trouvé</string>
+    <string name="url">URL : </string>
+
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Supprimer</string>
+    <string name="title_addFlux">Ajout d\'un flux RSS</string>
+    <string name="title_deleteFlux">Suppression de flux RSS</string>
+</resources>
