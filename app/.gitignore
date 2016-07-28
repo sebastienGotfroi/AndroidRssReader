@@ -1,1 +1,4 @@
 /build
+.idea
+TestOnTouch.iml
+local.properties
