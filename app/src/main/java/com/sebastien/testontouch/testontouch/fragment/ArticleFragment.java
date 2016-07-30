@@ -79,15 +79,6 @@ public class ArticleFragment extends Fragment {
                 public void onPageFinished(WebView view, String url) {
                     progress.setVisibility(View.GONE);
                 }
-                @Override
-                public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error){
-                    new AlertDialog.Builder(context)
-                            .setTitle("Error !")
-                            .setMessage(error.getErrorCode()+" : "+error.getDescription())
-                            .setCancelable(true)
-                            .setNeutralButton("Ok", null)
-                            .show();
-                }
             });
             webView.loadUrl(getArguments().getString(Constant.PARAM_LINK));
         }

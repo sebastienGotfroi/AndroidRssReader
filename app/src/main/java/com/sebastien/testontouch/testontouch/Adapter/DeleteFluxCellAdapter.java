@@ -68,7 +68,7 @@ public class DeleteFluxCellAdapter  extends RecyclerView.Adapter<DeleteFluxCellA
 
         public void display (Flux flux){
             currentFlux = flux;
-            textViewFlux.setText(currentFlux.getAlias());
+            textViewFlux.setText(currentFlux.displayFlux());
         }
 
     }

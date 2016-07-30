@@ -63,8 +63,10 @@ public class MainActivity extends AppCompatActivity implements URLLoader {
         }
     }
 
-    public void onSaveInstanceState(Bundle outState){
-        getFragmentManager().putFragment(outState,"mainFragment",mainFragment);
-        super.onSaveInstanceState(outState);
+    public void onSaveInstanceState(Bundle outState) {
+        if(!outState.isEmpty()){
+            getFragmentManager().putFragment(outState, "mainFragment", mainFragment);
+            super.onSaveInstanceState(outState);
+        }
     }
 }

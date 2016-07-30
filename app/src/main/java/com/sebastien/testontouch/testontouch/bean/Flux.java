@@ -15,6 +15,10 @@ public class Flux implements Serializable{
         this.alias = alias;
     }
 
+    public String displayFlux (){
+        return alias == null || alias.isEmpty() ? url : alias;
+    }
+
     @Override
     public boolean equals(Object o) {
         return ((Flux)o).getUrl().equals(getUrl()) ? true : false;
