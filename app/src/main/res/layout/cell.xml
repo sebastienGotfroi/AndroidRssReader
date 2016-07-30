@@ -4,18 +4,19 @@
     android:layout_height="match_parent"
     android:background="@drawable/ontouch">
 
-    <TextView
-        android:id="@+id/articleTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="15dp"
-        android:textAppearance="?android:textAppearanceLarge"
-        />
+    <!--<TextView-->
+        <!--android:id="@+id/articleTitle"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:layout_marginBottom="15dp"-->
+        <!--android:textAppearance="?android:textAppearanceLarge"-->
+        <!--/>-->
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="200dp"
-        android:layout_height="150dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/btn_star_big_off"
         android:layout_gravity="center"/>
 
 </LinearLayout>

@@ -14,4 +14,5 @@ public class Constant {
 
     public static final String PREFERENCE_FILE_KEY = "user_selected_themes";
     public static final String KEY_THEME = "fluxJson";
+    public static final String KEY_FAVORIS = "favoris";
 }
