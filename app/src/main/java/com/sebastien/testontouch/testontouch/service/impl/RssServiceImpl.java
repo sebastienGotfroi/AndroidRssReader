@@ -11,6 +11,7 @@ import com.sebastien.testontouch.testontouch.Constant;
 import com.sebastien.testontouch.testontouch.MyAdapter;
 import com.sebastien.testontouch.testontouch.XmlAsynchronousTask;
 import com.sebastien.testontouch.testontouch.bean.Article;
+import com.sebastien.testontouch.testontouch.bean.Flux;
 import com.sebastien.testontouch.testontouch.service.RssService;
 import com.google.gson.Gson;
 
@@ -27,6 +28,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -43,26 +45,26 @@ import javax.xml.parsers.ParserConfigurationException;
 public class RssServiceImpl implements RssService {
 
     @Override
-    public void addNewTheme(String url, Context context) {
+    public void addNewTheme(Flux newFlux, Context context) {
 
-        Set<String> listTheme = this.getThemes(context);
+        Set<Flux> listFlux = this.getThemes(context);
 
-        if(listTheme == null){
-            listTheme = new HashSet<>();
+        if(listFlux == null){
+            listFlux = new HashSet<>();
         }
 
-        listTheme.add(url);
+        listFlux.add(newFlux);
 
-        this.saveThemes(context, listTheme);
+        this.saveThemes(context, listFlux);
     }
 
     @Override
-    public void deleteThemes( Context context, Set<String> themesToDelete) {
-        Set<String> listTheme = this.getThemes(context);
+    public void deleteThemes( Context context, Set<Flux> themesToDelete) {
+        Set<Flux> listFlux = this.getThemes(context);
 
-        listTheme.removeAll(themesToDelete);
+        listFlux.removeAll(themesToDelete);
 
-        this.saveThemes(context, listTheme);
+        this.saveThemes(context, listFlux);
     }
 
     @Override
@@ -106,24 +108,29 @@ public class RssServiceImpl implements RssService {
         return new Pair<String, List<Article>>(flux, listArticles);
     }
 
-    public Set<String> getThemes (Context context){
+    public Set<Flux> getThemes (Context context){
         SharedPreferences userPreference = context.getSharedPreferences(Constant.PREFERENCE_FILE_KEY, 0);
-        Set<String> setTheme = userPreference.getStringSet(Constant.KEY_THEME, null);
-        return setTheme == null ||setTheme.size() == 0 ? null : new HashSet<>(setTheme);
+        String jsonFlux = userPreference.getString(Constant.KEY_THEME, null);
+
+        Gson gson = new Gson();
+
+        Flux[] tableFlux = gson.fromJson(jsonFlux, Flux[].class);
+
+        return tableFlux == null ||tableFlux.length == 0 ? null : new HashSet<Flux>(Arrays.asList(tableFlux));
     }
 
     public String getAllArticlesForAllThemes(Context context, MyAdapter adapter){
 
-        Set<String> listThemes = this.getThemes(context);
+        Set<Flux> listFlux= this.getThemes(context);
 
-        if (listThemes != null) {
+        if (listFlux != null) {
             List<XmlAsynchronousTask> listTask = new ArrayList<>();
 
 
-            for (String theme : listThemes) {
+            for (Flux flux : listFlux) {
                 XmlAsynchronousTask currentThread = new XmlAsynchronousTask(adapter);
                 listTask.add(currentThread);
-                AsyncTaskCompat.executeParallel(currentThread, theme);
+                AsyncTaskCompat.executeParallel(currentThread, flux.getUrl());
             }
 
             for (XmlAsynchronousTask xmlAsynchronousTask : listTask) {
@@ -139,9 +146,12 @@ public class RssServiceImpl implements RssService {
         return context.getString(R.string.noFlux);
     }
 
-    private void saveThemes (Context context, Set<String> themesToSave){
+    private void saveThemes (Context context, Set<Flux> fluxToSave){
         SharedPreferences userPreference = context.getSharedPreferences(Constant.PREFERENCE_FILE_KEY, 0);
-        userPreference.edit().putStringSet(Constant.KEY_THEME, themesToSave).commit();
+
+        Gson gson = new Gson();
+        String jsonFlux = gson.toJson(fluxToSave);
+        userPreference.edit().putString(Constant.KEY_THEME, jsonFlux).commit();
     }
 
     private InputStream getHttpStream(String urlName) throws IOException{

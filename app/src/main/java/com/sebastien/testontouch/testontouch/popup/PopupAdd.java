@@ -9,12 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.sebastien.testontouch.R;
+import com.sebastien.testontouch.testontouch.bean.Flux;
 import com.sebastien.testontouch.testontouch.fragment.MainFragment;
 import com.sebastien.testontouch.testontouch.service.impl.RssServiceImpl;
 
 public class PopupAdd extends AlertDialog {
 
-    private EditText editText;
+    private EditText editTextUrl;
+    private EditText editTextAlias;
     private MainFragment mainFragment;
 
     public PopupAdd (Context context, MainFragment mainFragment){
@@ -29,7 +31,9 @@ public class PopupAdd extends AlertDialog {
 
         Button buttonOk = (Button) findViewById(R.id.button_ok);
         Button buttonCancel = (Button) findViewById(R.id.button_cancel);
-        editText = (EditText) findViewById(R.id.editText_url);
+
+        editTextUrl = (EditText) findViewById(R.id.editText_url);
+        editTextAlias = (EditText) findViewById(R.id.editText_alias);
 
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,7 +45,9 @@ public class PopupAdd extends AlertDialog {
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new RssServiceImpl().addNewTheme(editText.getText().toString(), getContext());
+                Flux newFLux = new Flux(editTextUrl.getText().toString(), editTextAlias.getText().toString());
+                new RssServiceImpl().addNewTheme(newFLux, getContext());
+
                 mainFragment.refreshListOfAricles();
                 dismiss();
             }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.sebastien.testontouch.R;
 import com.sebastien.testontouch.testontouch.bean.Article;
+import com.sebastien.testontouch.testontouch.bean.Flux;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,9 +19,9 @@ import java.util.Set;
  */
 public class DeleteFluxCellAdapter  extends RecyclerView.Adapter<DeleteFluxCellAdapter.MyViewHolder>{
 
-    private Set<String> listFlux;
+    private Set<Flux> listFlux;
 
-    private Set<String> listSelectedFlux = new HashSet<>();
+    private Set<Flux> listSelectedFlux = new HashSet<>();
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -31,7 +32,7 @@ public class DeleteFluxCellAdapter  extends RecyclerView.Adapter<DeleteFluxCellA
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.display((String)listFlux.toArray()[position]);
+        holder.display((Flux) listFlux.toArray()[position]);
     }
 
     @Override
@@ -44,7 +45,7 @@ public class DeleteFluxCellAdapter  extends RecyclerView.Adapter<DeleteFluxCellA
         private final CheckBox checkBox;
 
         private final TextView textViewFlux;
-        private String currentFlux;
+        private Flux currentFlux;
 
         public MyViewHolder (final View itemView) {
             super(itemView);
@@ -65,25 +66,25 @@ public class DeleteFluxCellAdapter  extends RecyclerView.Adapter<DeleteFluxCellA
             textViewFlux = ((TextView) itemView.findViewById(R.id.flux_delete));
         }
 
-        public void display (String flux){
+        public void display (Flux flux){
             currentFlux = flux;
-            textViewFlux.setText(currentFlux);
+            textViewFlux.setText(currentFlux.getAlias());
         }
 
     }
-    public Set<String> getListFlux() {
+    public Set<Flux> getListFlux() {
         return listFlux;
     }
 
-    public void setListFlux(Set<String> listFlux) {
+    public void setListFlux(Set<Flux> listFlux) {
         this.listFlux = listFlux;
     }
 
-    public Set<String> getListSelectedFlux() {
+    public Set<Flux> getListSelectedFlux() {
         return listSelectedFlux;
     }
 
-    public void setListSelectedFlux(Set<String> listSelectedFlux) {
+    public void setListSelectedFlux(Set<Flux> listSelectedFlux) {
         this.listSelectedFlux = listSelectedFlux;
     }
 }

@@ -5,6 +5,7 @@
     <string name="intent_share_title">Share!</string>
     <string name="noFlux">Pas de flux rss trouvé</string>
     <string name="url">URL : </string>
+    <string name="alias">Alias : </string>
 
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>

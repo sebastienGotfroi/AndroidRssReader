@@ -13,5 +13,5 @@ public class Constant {
     public static final String DOM_ELEMENT_PUBDATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss zzz";
 
     public static final String PREFERENCE_FILE_KEY = "user_selected_themes";
-    public static final String KEY_THEME = "themes";
+    public static final String KEY_THEME = "fluxJson";
 }

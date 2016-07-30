@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Pair;
 
 import com.sebastien.testontouch.testontouch.bean.Article;
+import com.sebastien.testontouch.testontouch.bean.Flux;
 
 import org.xml.sax.SAXException;
 
@@ -20,7 +21,7 @@ import javax.xml.parsers.ParserConfigurationException;
 public interface RssService {
 
     public Pair<String, List<Article>> getAllArticle (String flux) throws MalformedURLException, IOException, ParserConfigurationException, SAXException;
-    public void addNewTheme (String url, Context context);
-    public void deleteThemes ( Context context, Set<String> themesToDelete);
-    public Set<String> getThemes (Context context);
+    public void addNewTheme (Flux newFlux, Context context);
+    public void deleteThemes ( Context context, Set<Flux> themesToDelete);
+    public Set<Flux> getThemes (Context context);
 }

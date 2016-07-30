@@ -6,16 +6,30 @@
 
     <TextView
         android:id="@+id/textView_url"
-        android:layout_margin="5dp"
+        android:layout_margin="7dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/url"/>
 
     <EditText
         android:id="@+id/editText_url"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView_url"/>
+
+    <TextView
+        android:id="@+id/textView_alias"
+        android:layout_margin="7dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editText_url"
+        android:text="@string/alias"/>
+
+    <EditText
+        android:id="@+id/editText_alias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView_alias"/>
 
     <GridLayout
         android:layout_width="wrap_content"
@@ -23,7 +37,7 @@
         android:columnCount="2"
         android:rowCount="1"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/editText_url">
+        android:layout_below="@id/editText_alias">
 
         <Button
             android:id="@+id/button_ok"
