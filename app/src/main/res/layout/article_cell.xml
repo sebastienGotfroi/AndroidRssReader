@@ -7,6 +7,17 @@
     android:layout_margin="5dp"
     android:background="@drawable/ontouch">
 
+
+    <ImageView
+        android:id="@+id/iconFavorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/btn_star_big_off"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:background="@android:color/transparent"
+        />
+
     <TextView
         android:id="@+id/articleTitle"
         android:layout_width="wrap_content"
@@ -17,14 +28,5 @@
         android:text="cocofjkldfslkdfsklfdsklfdsklfdsklfsdlkfsdkljklfsdkljdfsklsd"
         android:textAppearance="?android:textAppearanceLarge"
         android:textColor="#eeeeee"
-        />
-
-    <ImageView
-        android:id="@+id/iconFavorite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@android:drawable/btn_star_big_off"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
         />
 </RelativeLayout>

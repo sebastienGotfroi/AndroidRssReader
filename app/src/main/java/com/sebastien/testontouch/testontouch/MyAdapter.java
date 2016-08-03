@@ -1,9 +1,11 @@
 package com.sebastien.testontouch.testontouch;
 
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sebastien.testontouch.R;
@@ -52,10 +54,29 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         private Article currentArticle;
 
+        private ImageView iconFavorite;
+
         public MyViewHolder (final View itemView) {
             super(itemView);
 
             articleTitle = ((TextView) itemView.findViewById(R.id.articleTitle));
+
+            iconFavorite = ((ImageView) itemView.findViewById(R.id.iconFavorite));
+
+            iconFavorite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(currentArticle.getFavorite()){
+                        iconFavorite.setImageDrawable(v.getResources().getDrawable(android.R.drawable.btn_star_big_off, null));
+                        currentArticle.setFavorite(false);
+                    }
+                    else{
+                        iconFavorite.setImageDrawable(v.getResources().getDrawable(android.R.drawable.btn_star_big_on,null));
+                        currentArticle.setFavorite(true);
+                    }
+
+                }
+            });
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -68,6 +89,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         public void display (Article article){
             currentArticle = article;
+
+            if(currentArticle.getFavorite()){
+                iconFavorite.setImageDrawable(itemView.getResources().getDrawable(android.R.drawable.btn_star_big_on, null));
+            }
+            else{
+                iconFavorite.setImageDrawable(itemView.getResources().getDrawable(android.R.drawable.btn_star_big_off,null));
+            }
+
             articleTitle.setText(article.getTitle());
         }
     }

@@ -12,6 +12,9 @@ public class Constant {
     public static final String DOM_ELEMENT_PUBDATE = "pubDate";
     public static final String DOM_ELEMENT_PUBDATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss zzz";
 
+    public static final String FAVORITE_ON = "favoriteOn";
+    public static final String FAVORITE_OFF = "favoriteOff";
+
     public static final String PREFERENCE_FILE_KEY = "user_selected_themes";
     public static final String KEY_THEME = "fluxJson";
     public static final String KEY_FAVORIS = "favoris";

@@ -10,11 +10,13 @@ public class Article implements Comparable{
     private String title;
     private String articleLink;
     private Date pubDate;
+    private Boolean isFavorite;
 
     public Article(String title, String articleLink, Date pubDate) {
         this.title = title;
         this.articleLink = articleLink;
         this.pubDate = pubDate;
+        isFavorite = false;
     }
 
     @Override
@@ -57,5 +59,13 @@ public class Article implements Comparable{
 
     public void setArticleLink(String articleLink) {
         this.articleLink = articleLink;
+    }
+
+    public Boolean getFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(Boolean favorite) {
+        isFavorite = favorite;
     }
 }
