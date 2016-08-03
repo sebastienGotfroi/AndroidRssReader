@@ -18,7 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.sebastien.testontouch.testontouch.MyAdapter;
+import com.sebastien.testontouch.testontouch.Adapter.MyAdapter;
 import com.sebastien.testontouch.R;
 import com.sebastien.testontouch.testontouch.URLLoader;
 import com.sebastien.testontouch.testontouch.XmlAsynchronousTask;
@@ -117,7 +117,7 @@ public class MainFragment extends Fragment {
 
             @Override
             protected Object doInBackground(Object[] objects) {
-                return new RssServiceImpl().getAllArticlesForAllThemes(context, adapter);
+                return RssServiceImpl.getRssService().getAllArticlesForAllThemes(context, adapter);
             }
 
             @Override

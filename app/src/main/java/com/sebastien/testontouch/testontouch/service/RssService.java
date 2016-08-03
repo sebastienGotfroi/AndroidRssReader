@@ -3,6 +3,7 @@ package com.sebastien.testontouch.testontouch.service;
 import android.content.Context;
 import android.util.Pair;
 
+import com.sebastien.testontouch.testontouch.Adapter.MyAdapter;
 import com.sebastien.testontouch.testontouch.bean.Article;
 import com.sebastien.testontouch.testontouch.bean.Flux;
 
@@ -24,4 +25,5 @@ public interface RssService {
     public void addNewTheme (Flux newFlux, Context context);
     public void deleteThemes ( Context context, Set<Flux> themesToDelete);
     public Set<Flux> getThemes (Context context);
+    public String getAllArticlesForAllThemes(Context context, MyAdapter adapter);
 }

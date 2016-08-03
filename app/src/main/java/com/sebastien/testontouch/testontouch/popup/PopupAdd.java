@@ -1,6 +1,5 @@
 package com.sebastien.testontouch.testontouch.popup;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -46,7 +45,7 @@ public class PopupAdd extends AlertDialog {
             @Override
             public void onClick(View view) {
                 Flux newFLux = new Flux(editTextUrl.getText().toString(), editTextAlias.getText().toString());
-                new RssServiceImpl().addNewTheme(newFLux, getContext());
+                RssServiceImpl.getRssService().addNewTheme(newFLux, getContext());
 
                 mainFragment.refreshListOfAricles();
                 dismiss();

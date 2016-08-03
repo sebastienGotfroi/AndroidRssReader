@@ -1,6 +1,5 @@
 package com.sebastien.testontouch.testontouch.service.impl;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v4.os.AsyncTaskCompat;
@@ -8,7 +7,7 @@ import android.util.Pair;
 
 import com.sebastien.testontouch.R;
 import com.sebastien.testontouch.testontouch.Constant;
-import com.sebastien.testontouch.testontouch.MyAdapter;
+import com.sebastien.testontouch.testontouch.Adapter.MyAdapter;
 import com.sebastien.testontouch.testontouch.XmlAsynchronousTask;
 import com.sebastien.testontouch.testontouch.bean.Article;
 import com.sebastien.testontouch.testontouch.bean.Flux;
@@ -43,6 +42,15 @@ import javax.xml.parsers.ParserConfigurationException;
  * Created by Sébastien on 03-04-16.
  */
 public class RssServiceImpl implements RssService {
+
+    private static RssService rssService;
+
+    public static RssService getRssService(){
+        if(rssService == null){
+            rssService = new RssServiceImpl();
+        }
+        return rssService;
+    }
 
     @Override
     public void addNewTheme(Flux newFlux, Context context) {

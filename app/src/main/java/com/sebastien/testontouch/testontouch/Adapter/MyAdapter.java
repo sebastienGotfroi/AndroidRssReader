@@ -1,6 +1,5 @@
-package com.sebastien.testontouch.testontouch;
+package com.sebastien.testontouch.testontouch.Adapter;
 
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sebastien.testontouch.R;
+import com.sebastien.testontouch.testontouch.URLLoader;
 import com.sebastien.testontouch.testontouch.bean.Article;
 
 import java.util.List;

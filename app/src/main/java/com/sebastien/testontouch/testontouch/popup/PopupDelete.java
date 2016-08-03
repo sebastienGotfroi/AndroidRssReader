@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.sebastien.testontouch.R;
 import com.sebastien.testontouch.testontouch.Adapter.DeleteFluxCellAdapter;
@@ -41,7 +40,7 @@ public class PopupDelete extends AlertDialog {
         deleteFluxCellAdapter = new DeleteFluxCellAdapter();
         rv.setAdapter(deleteFluxCellAdapter);
 
-        deleteFluxCellAdapter.setListFlux(new RssServiceImpl().getThemes(this.getContext()));
+        deleteFluxCellAdapter.setListFlux(RssServiceImpl.getRssService().getThemes(this.getContext()));
 
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +53,7 @@ public class PopupDelete extends AlertDialog {
             @Override
             public void onClick(View view) {
 
-                new RssServiceImpl().deleteThemes(getContext(), deleteFluxCellAdapter.getListSelectedFlux());
+                RssServiceImpl.getRssService().deleteThemes(getContext(), deleteFluxCellAdapter.getListSelectedFlux());
                 mainFragment.refreshListOfAricles();
                 dismiss();
             }
