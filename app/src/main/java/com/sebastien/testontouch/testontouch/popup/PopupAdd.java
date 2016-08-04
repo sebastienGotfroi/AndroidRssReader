@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.sebastien.testontouch.R;
 import com.sebastien.testontouch.testontouch.bean.Flux;
+import com.sebastien.testontouch.testontouch.fragment.ListArticleAbstractFragment;
 import com.sebastien.testontouch.testontouch.fragment.MainFragment;
 import com.sebastien.testontouch.testontouch.service.impl.RssServiceImpl;
 
@@ -16,11 +17,11 @@ public class PopupAdd extends AlertDialog {
 
     private EditText editTextUrl;
     private EditText editTextAlias;
-    private MainFragment mainFragment;
+    private ListArticleAbstractFragment listArticleAbstractFragment;
 
-    public PopupAdd (Context context, MainFragment mainFragment){
+    public PopupAdd (Context context, ListArticleAbstractFragment listArticleAbstractFragment){
         super(context);
-        this.mainFragment = mainFragment;
+        this.listArticleAbstractFragment = listArticleAbstractFragment;
     }
 
     @Override
@@ -47,7 +48,9 @@ public class PopupAdd extends AlertDialog {
                 Flux newFLux = new Flux(editTextUrl.getText().toString(), editTextAlias.getText().toString());
                 RssServiceImpl.getRssService().addNewTheme(newFLux, getContext());
 
-                mainFragment.refreshListOfAricles();
+                if(listArticleAbstractFragment.getClass().equals(MainFragment.class)) {
+                    ((MainFragment)listArticleAbstractFragment).refreshListOfArticles();
+                }
                 dismiss();
             }
         });

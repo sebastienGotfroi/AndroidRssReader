@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import com.sebastien.testontouch.R;
 import com.sebastien.testontouch.testontouch.Adapter.DeleteFluxCellAdapter;
+import com.sebastien.testontouch.testontouch.fragment.ListArticleAbstractFragment;
 import com.sebastien.testontouch.testontouch.fragment.MainFragment;
 import com.sebastien.testontouch.testontouch.service.impl.RssServiceImpl;
 
@@ -19,11 +20,11 @@ import com.sebastien.testontouch.testontouch.service.impl.RssServiceImpl;
 public class PopupDelete extends AlertDialog {
 
     private DeleteFluxCellAdapter deleteFluxCellAdapter;
-    private MainFragment mainFragment;
+    private ListArticleAbstractFragment listArticleAbstractFragment;
 
-    public PopupDelete (Context context, MainFragment mainFragment){
+    public PopupDelete (Context context, ListArticleAbstractFragment listArticleAbstractFragment){
         super(context);
-        this.mainFragment = mainFragment;
+        this.listArticleAbstractFragment = listArticleAbstractFragment;
     }
 
     @Override
@@ -54,7 +55,10 @@ public class PopupDelete extends AlertDialog {
             public void onClick(View view) {
 
                 RssServiceImpl.getRssService().deleteThemes(getContext(), deleteFluxCellAdapter.getListSelectedFlux());
-                mainFragment.refreshListOfAricles();
+
+                if(listArticleAbstractFragment.getClass().equals(MainFragment.class)) {
+                    ((MainFragment) listArticleAbstractFragment).refreshListOfArticles();
+                }
                 dismiss();
             }
         });

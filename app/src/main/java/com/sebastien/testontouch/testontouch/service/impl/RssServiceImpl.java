@@ -53,29 +53,6 @@ public class RssServiceImpl implements RssService {
     }
 
     @Override
-    public void addNewTheme(Flux newFlux, Context context) {
-
-        Set<Flux> listFlux = this.getThemes(context);
-
-        if(listFlux == null){
-            listFlux = new HashSet<>();
-        }
-
-        listFlux.add(newFlux);
-
-        this.saveThemes(context, listFlux);
-    }
-
-    @Override
-    public void deleteThemes( Context context, Set<Flux> themesToDelete) {
-        Set<Flux> listFlux = this.getThemes(context);
-
-        listFlux.removeAll(themesToDelete);
-
-        this.saveThemes(context, listFlux);
-    }
-
-    @Override
     public Pair<String, List<Article>> getAllArticle(String flux) throws MalformedURLException, IOException, ParserConfigurationException, SAXException{
 
         List<Article> listArticles = new ArrayList<>();
@@ -116,24 +93,12 @@ public class RssServiceImpl implements RssService {
         return new Pair<String, List<Article>>(flux, listArticles);
     }
 
-    public Set<Flux> getThemes (Context context){
-        SharedPreferences userPreference = context.getSharedPreferences(Constant.PREFERENCE_FILE_KEY, 0);
-        String jsonFlux = userPreference.getString(Constant.KEY_THEME, null);
-
-        Gson gson = new Gson();
-
-        Flux[] tableFlux = gson.fromJson(jsonFlux, Flux[].class);
-
-        return tableFlux == null ||tableFlux.length == 0 ? null : new HashSet<Flux>(Arrays.asList(tableFlux));
-    }
-
     public String getAllArticlesForAllThemes(Context context, MyAdapter adapter){
 
         Set<Flux> listFlux= this.getThemes(context);
 
         if (listFlux != null) {
             List<XmlAsynchronousTask> listTask = new ArrayList<>();
-
 
             for (Flux flux : listFlux) {
                 XmlAsynchronousTask currentThread = new XmlAsynchronousTask(adapter);
@@ -154,12 +119,88 @@ public class RssServiceImpl implements RssService {
         return context.getString(R.string.noFlux);
     }
 
+    @Override
+    public void addNewTheme(Flux newFlux, Context context) {
+
+        Set<Flux> listFlux = this.getThemes(context);
+
+        if(listFlux == null){
+            listFlux = new HashSet<>();
+        }
+
+        listFlux.add(newFlux);
+
+        this.saveThemes(context, listFlux);
+    }
+
+    @Override
+    public void deleteThemes( Context context, Set<Flux> themesToDelete) {
+        Set<Flux> listFlux = this.getThemes(context);
+
+        listFlux.removeAll(themesToDelete);
+
+        this.saveThemes(context, listFlux);
+    }
+
+    public Set<Flux> getThemes (Context context){
+        SharedPreferences userPreference = context.getSharedPreferences(Constant.PREFERENCE_FILE_KEY, 0);
+        String jsonFlux = userPreference.getString(Constant.KEY_THEME, null);
+
+        Gson gson = new Gson();
+
+        Flux[] tableFlux = gson.fromJson(jsonFlux, Flux[].class);
+
+        return tableFlux == null ||tableFlux.length == 0 ? null : new HashSet<Flux>(Arrays.asList(tableFlux));
+    }
+
+    @Override
+    public void addFavorite(Article newFavorite, Context context) {
+
+        Set<Article> listFavorite = this.getFavorites(context);
+
+        if(listFavorite == null){
+            listFavorite = new HashSet<>();
+        }
+
+        listFavorite.add(newFavorite);
+
+        this.saveFavorites(context, listFavorite);
+    }
+
+    @Override
+    public void deleteFavorite( Context context, Article articleToRemove) {
+        Set<Article> listFavorite = this.getFavorites(context);
+
+        listFavorite.remove(articleToRemove);
+
+        this.saveFavorites(context, listFavorite);
+    }
+
+    public Set<Article> getFavorites (Context context){
+        SharedPreferences userPreference = context.getSharedPreferences(Constant.PREFERENCE_FILE_KEY, 0);
+        String jsonFavorite = userPreference.getString(Constant.KEY_FAVORIS, null);
+
+        Gson gson = new Gson();
+
+        Article[] tableArticle = gson.fromJson(jsonFavorite, Article[].class);
+
+        return tableArticle == null ||tableArticle.length == 0 ? null : new HashSet<Article>(Arrays.asList(tableArticle));
+    }
+
     private void saveThemes (Context context, Set<Flux> fluxToSave){
         SharedPreferences userPreference = context.getSharedPreferences(Constant.PREFERENCE_FILE_KEY, 0);
 
         Gson gson = new Gson();
         String jsonFlux = gson.toJson(fluxToSave);
         userPreference.edit().putString(Constant.KEY_THEME, jsonFlux).commit();
+    }
+
+    private void saveFavorites (Context context, Set<Article> favoriteToSave){
+        SharedPreferences userPreference = context.getSharedPreferences(Constant.PREFERENCE_FILE_KEY, 0);
+
+        Gson gson = new Gson();
+        String jsonFavorite = gson.toJson(favoriteToSave);
+        userPreference.edit().putString(Constant.KEY_FAVORIS, jsonFavorite).commit();
     }
 
     private InputStream getHttpStream(String urlName) throws IOException{

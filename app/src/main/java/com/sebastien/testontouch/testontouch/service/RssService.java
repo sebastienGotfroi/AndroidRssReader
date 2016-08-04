@@ -25,5 +25,8 @@ public interface RssService {
     public void addNewTheme (Flux newFlux, Context context);
     public void deleteThemes ( Context context, Set<Flux> themesToDelete);
     public Set<Flux> getThemes (Context context);
+    public void addFavorite (Article newFavorite, Context context);
+    public void deleteFavorite( Context context, Article articleToRemove);
+    public Set<Article> getFavorites (Context context);
     public String getAllArticlesForAllThemes(Context context, MyAdapter adapter);
 }

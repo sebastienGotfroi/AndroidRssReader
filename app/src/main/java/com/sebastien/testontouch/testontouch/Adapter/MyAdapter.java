@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.sebastien.testontouch.R;
 import com.sebastien.testontouch.testontouch.URLLoader;
 import com.sebastien.testontouch.testontouch.bean.Article;
+import com.sebastien.testontouch.testontouch.service.impl.RssServiceImpl;
 
 import java.util.List;
 import java.util.Set;
@@ -69,12 +70,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                     if(currentArticle.getFavorite()){
                         iconFavorite.setImageDrawable(v.getResources().getDrawable(android.R.drawable.btn_star_big_off, null));
                         currentArticle.setFavorite(false);
+                        RssServiceImpl.getRssService().deleteFavorite(itemView.getContext(), currentArticle);
                     }
                     else{
                         iconFavorite.setImageDrawable(v.getResources().getDrawable(android.R.drawable.btn_star_big_on,null));
                         currentArticle.setFavorite(true);
+                        RssServiceImpl.getRssService().addFavorite(currentArticle, itemView.getContext());
                     }
-
                 }
             });
 
@@ -106,11 +108,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             listArticles.clear();
             notifyDataSetChanged();
         }
-
     }
 
     public void setListArticles(Set<Article> listArticles){
         this.listArticles = listArticles;
+        notifyDataSetChanged();
     }
 
     public void addListArticles (List<Article> listArticles) {

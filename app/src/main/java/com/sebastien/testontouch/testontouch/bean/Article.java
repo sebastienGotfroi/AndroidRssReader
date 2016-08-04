@@ -28,8 +28,7 @@ public class Article implements Comparable{
 
     @Override
     public int hashCode(){
-        String[] strings = articleLink.split("_");
-        return Integer.valueOf(strings[strings.length-1]);
+        return articleLink.hashCode();
     }
 
     public  int compareTo(Object a) {
