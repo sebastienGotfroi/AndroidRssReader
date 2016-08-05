@@ -3,7 +3,7 @@ package com.sebastien.testontouch.testontouch.service;
 import android.content.Context;
 import android.util.Pair;
 
-import com.sebastien.testontouch.testontouch.Adapter.MyAdapter;
+import com.sebastien.testontouch.testontouch.adapter.MyAdapter;
 import com.sebastien.testontouch.testontouch.bean.Article;
 import com.sebastien.testontouch.testontouch.bean.Flux;
 

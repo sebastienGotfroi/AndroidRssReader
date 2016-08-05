@@ -7,7 +7,7 @@ import android.util.Pair;
 
 import com.sebastien.testontouch.R;
 import com.sebastien.testontouch.testontouch.Constant;
-import com.sebastien.testontouch.testontouch.Adapter.MyAdapter;
+import com.sebastien.testontouch.testontouch.adapter.MyAdapter;
 import com.sebastien.testontouch.testontouch.XmlAsynchronousTask;
 import com.sebastien.testontouch.testontouch.bean.Article;
 import com.sebastien.testontouch.testontouch.bean.Flux;

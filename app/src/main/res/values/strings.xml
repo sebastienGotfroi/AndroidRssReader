@@ -12,4 +12,12 @@
     <string name="delete">Supprimer</string>
     <string name="title_addFlux">Ajout d\'un flux RSS</string>
     <string name="title_deleteFlux">Suppression de flux RSS</string>
+
+    <!-- Category -->
+    <string name="categoryTechnology">Technologie</string>
+    <string name="categoryNews">Actualité</string>
+    <string name="categorySports">Sports</string>
+    <string name="categoryKitchen">Cuisine</string>
+    <string name="categoryOther">Autre</string>
+
 </resources>

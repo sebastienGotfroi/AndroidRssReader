@@ -2,16 +2,13 @@ package com.sebastien.testontouch.testontouch.fragment;
 
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.os.AsyncTaskCompat;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ProgressBar;
 
-import com.sebastien.testontouch.testontouch.Adapter.MyAdapter;
 import com.sebastien.testontouch.R;
 import com.sebastien.testontouch.testontouch.XmlAsynchronousTask;
 import com.sebastien.testontouch.testontouch.popup.PopupAdd;

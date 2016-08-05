@@ -3,7 +3,7 @@ package com.sebastien.testontouch.testontouch;
 import android.os.AsyncTask;
 import android.util.Pair;
 
-import com.sebastien.testontouch.testontouch.Adapter.MyAdapter;
+import com.sebastien.testontouch.testontouch.adapter.MyAdapter;
 import com.sebastien.testontouch.testontouch.bean.Article;
 import com.sebastien.testontouch.testontouch.bean.AsyncTaskResult;
 import com.sebastien.testontouch.testontouch.service.impl.RssServiceImpl;
