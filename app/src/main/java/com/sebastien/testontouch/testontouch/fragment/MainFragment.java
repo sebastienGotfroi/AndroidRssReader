@@ -24,12 +24,12 @@ public class MainFragment extends ListArticleAbstractFragment {
 
     private List<XmlAsynchronousTask> listTask = null;
 
-    public static MainFragment create (){
+    public static MainFragment create() {
         return new MainFragment();
     }
 
     @Override
-    public void onViewCreated (View view, @Nullable Bundle saveInstanceState){
+    public void onViewCreated(View view, @Nullable Bundle saveInstanceState) {
         super.onViewCreated(view, saveInstanceState);
         refreshListOfArticles();
     }
@@ -37,19 +37,23 @@ public class MainFragment extends ListArticleAbstractFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()){
-            case R.id.action_favorite : getFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.activity_main, FavoriteFragment.create())
-                    .addToBackStack(null)
-                    .commit();
-                    break;
-            case R.id.action_refresh : progress.setVisibility(View.VISIBLE);
+        switch (item.getItemId()) {
+            case R.id.action_favorite:
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.activity_main, FavoriteFragment.create())
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            case R.id.action_refresh:
+                progress.setVisibility(View.VISIBLE);
                 refreshListOfArticles();
                 break;
-            case R.id.action_add : new PopupAdd(getActivity(), this).show();
+            case R.id.action_add:
+                new PopupAdd(getActivity(), this).show();
                 break;
-            case R.id.action_delete : new PopupDelete(getActivity(), this).show();
+            case R.id.action_delete:
+                new PopupDelete(getActivity(), this).show();
                 break;
         }
 
@@ -57,18 +61,18 @@ public class MainFragment extends ListArticleAbstractFragment {
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
 
         super.onDestroy();
 
-        if(listTask != null && listTask.size()>0){
+        if (listTask != null && listTask.size() > 0) {
             for (XmlAsynchronousTask xmlAsynchronousTask : listTask) {
                 xmlAsynchronousTask.cancel(true);
             }
         }
     }
 
-    public void refreshListOfArticles () {
+    public void refreshListOfArticles() {
 
         adapter.clearList();
 
@@ -81,7 +85,7 @@ public class MainFragment extends ListArticleAbstractFragment {
 
             @Override
             public void onPostExecute(Object result) {
-                if(result != null) {
+                if (result != null) {
                     progress.setVisibility(View.GONE);
 
                     new AlertDialog.Builder(getActivity())

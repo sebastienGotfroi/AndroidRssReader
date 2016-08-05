@@ -1,5 +1,13 @@
 package com.sebastien.testontouch.testontouch.adapter;
 
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.DrawableContainer.DrawableContainerState;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.StateListDrawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,6 +99,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         public void display (Article article){
             currentArticle = article;
+
+            StateListDrawable background = (StateListDrawable) itemView.getBackground();
+            DrawableContainerState drawableContainerState = (DrawableContainerState) background.getConstantState();
+            Drawable[] children = drawableContainerState.getChildren();
+            GradientDrawable notPressedDrawable = (GradientDrawable) children[1];
+            notPressedDrawable.setColors(new int[]{Color.parseColor(currentArticle.getCategory().getStartColor()), Color.parseColor(currentArticle.getCategory().getEndColor())});
+
+            itemView.setBackground(notPressedDrawable);
 
             if(currentArticle.getFavorite()){
                 iconFavorite.setImageDrawable(itemView.getResources().getDrawable(android.R.drawable.btn_star_big_on, null));

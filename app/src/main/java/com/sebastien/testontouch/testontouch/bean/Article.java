@@ -1,39 +1,43 @@
 package com.sebastien.testontouch.testontouch.bean;
 
+import android.support.v4.content.ContextCompat;
+
 import java.util.Date;
 
 /**
  * Created by Sébastien on 03-04-16.
  */
-public class Article implements Comparable{
+public class Article implements Comparable {
 
     private String title;
     private String articleLink;
     private Date pubDate;
     private Boolean isFavorite;
+    private Category category;
 
     public Article(String title, String articleLink, Date pubDate) {
         this.title = title;
         this.articleLink = articleLink;
         this.pubDate = pubDate;
         isFavorite = false;
+        category = new Category();
     }
 
     @Override
-    public boolean equals(Object obj){
+    public boolean equals(Object obj) {
         if (obj == null)
             return false;
-        return((Article)obj).getTitle().equals(title);
+        return ((Article) obj).getTitle().equals(title);
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return articleLink.hashCode();
     }
 
-    public  int compareTo(Object a) {
+    public int compareTo(Object a) {
 
-        return ((Article)a).getPubDate().compareTo(getPubDate());
+        return ((Article) a).getPubDate().compareTo(getPubDate());
     }
 
     public Date getPubDate() {
@@ -66,5 +70,13 @@ public class Article implements Comparable{
 
     public void setFavorite(Boolean favorite) {
         isFavorite = favorite;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
