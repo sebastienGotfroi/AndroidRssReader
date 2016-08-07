@@ -1,4 +1,4 @@
-package com.sebastien.testontouch.testontouch.Adapter;
+package com.sebastien.testontouch.testontouch.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,7 +8,6 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.sebastien.testontouch.R;
-import com.sebastien.testontouch.testontouch.bean.Article;
 import com.sebastien.testontouch.testontouch.bean.Flux;
 
 import java.util.HashSet;

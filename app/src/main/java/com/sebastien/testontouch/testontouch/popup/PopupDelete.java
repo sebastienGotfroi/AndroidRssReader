@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.sebastien.testontouch.R;
-import com.sebastien.testontouch.testontouch.Adapter.DeleteFluxCellAdapter;
+import com.sebastien.testontouch.testontouch.adapter.DeleteFluxCellAdapter;
 import com.sebastien.testontouch.testontouch.fragment.ListArticleAbstractFragment;
 import com.sebastien.testontouch.testontouch.fragment.MainFragment;
 import com.sebastien.testontouch.testontouch.service.impl.RssServiceImpl;

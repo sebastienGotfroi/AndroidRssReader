@@ -1,5 +1,13 @@
-package com.sebastien.testontouch.testontouch.Adapter;
+package com.sebastien.testontouch.testontouch.adapter;
 
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.DrawableContainer.DrawableContainerState;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.StateListDrawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +18,7 @@ import android.widget.TextView;
 import com.sebastien.testontouch.R;
 import com.sebastien.testontouch.testontouch.URLLoader;
 import com.sebastien.testontouch.testontouch.bean.Article;
+import com.sebastien.testontouch.testontouch.bean.Category;
 import com.sebastien.testontouch.testontouch.service.impl.RssServiceImpl;
 
 import java.util.List;
@@ -91,6 +100,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         public void display (Article article){
             currentArticle = article;
+
+            StateListDrawable background = (StateListDrawable) itemView.getBackground();
+            DrawableContainerState drawableContainerState = (DrawableContainerState) background.getConstantState();
+            Drawable[] children = drawableContainerState.getChildren();
+            GradientDrawable notPressedDrawable = (GradientDrawable) children[1];
+
+            if(currentArticle.getFlux().getCategory() == null || currentArticle.getFlux().getCategory().getStartColor()== null) {
+                if(currentArticle.getFlux().getCategory() == null){
+                    currentArticle.getFlux().setCategory(new Category("Autre"));
+                }
+                currentArticle.getFlux().getCategory().setStartColor(R.color.transparentDarkBlue);
+                currentArticle.getFlux().getCategory().setEndColorId(R.color.darkBlue);
+            }
+
+            notPressedDrawable.setColors(new int[]{currentArticle.getFlux().getCategory().getStartColor(), currentArticle.getFlux().getCategory().getEndColor()});
 
             if(currentArticle.getFavorite()){
                 iconFavorite.setImageDrawable(itemView.getResources().getDrawable(android.R.drawable.btn_star_big_on, null));
