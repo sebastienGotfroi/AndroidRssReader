@@ -1,5 +1,11 @@
 package com.sebastien.testontouch.testontouch.bean;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
+
+import com.sebastien.testontouch.R;
+
 import java.io.Serializable;
 
 /**
@@ -9,10 +15,12 @@ public class Flux implements Serializable{
 
     private String url;
     private String alias;
+    private Category category;
 
-    public Flux (String url, String alias){
+    public Flux (String url, String alias, Category category){
         this.url = url;
         this.alias = alias;
+        this.category = category;
     }
 
     public String displayFlux (){
@@ -43,5 +51,13 @@ public class Flux implements Serializable{
 
     public void setAlias(String alias) {
         this.alias = alias;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.sebastien.testontouch;
+package com.sebastien.testontouch.testontouch;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

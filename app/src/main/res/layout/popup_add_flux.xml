@@ -37,8 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/editText_alias"
         android:layout_centerHorizontal="true"
-        android:layout_margin="5dp"
-        >
+        android:layout_margin="5dp">
     </Spinner>
 
     <GridLayout
@@ -47,7 +46,7 @@
         android:columnCount="2"
         android:rowCount="1"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/editText_alias">
+        android:layout_below="@id/spinner_category">
 
         <Button
             android:id="@+id/button_ok"

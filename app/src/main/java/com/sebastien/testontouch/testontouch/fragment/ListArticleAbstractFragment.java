@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.sebastien.testontouch.R;
-import com.sebastien.testontouch.testontouch.Adapter.MyAdapter;
+import com.sebastien.testontouch.testontouch.adapter.MyAdapter;
 import com.sebastien.testontouch.testontouch.URLLoader;
 
 /**

@@ -2,14 +2,16 @@ package com.sebastien.testontouch.testontouch.service.impl;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.os.AsyncTaskCompat;
 import android.util.Pair;
 
 import com.sebastien.testontouch.R;
 import com.sebastien.testontouch.testontouch.Constant;
-import com.sebastien.testontouch.testontouch.Adapter.MyAdapter;
+import com.sebastien.testontouch.testontouch.adapter.MyAdapter;
 import com.sebastien.testontouch.testontouch.XmlAsynchronousTask;
 import com.sebastien.testontouch.testontouch.bean.Article;
+import com.sebastien.testontouch.testontouch.bean.Category;
 import com.sebastien.testontouch.testontouch.bean.Flux;
 import com.sebastien.testontouch.testontouch.service.RssService;
 import com.google.gson.Gson;
@@ -45,21 +47,21 @@ public class RssServiceImpl implements RssService {
 
     private static RssService rssService;
 
-    public static RssService getRssService(){
-        if(rssService == null){
+    public static RssService getRssService() {
+        if (rssService == null) {
             rssService = new RssServiceImpl();
         }
         return rssService;
     }
 
     @Override
-    public Pair<String, List<Article>> getAllArticle(String flux) throws MalformedURLException, IOException, ParserConfigurationException, SAXException{
+    public Pair<String, List<Article>> getAllArticle(Flux flux) throws MalformedURLException, IOException, ParserConfigurationException, SAXException {
 
         List<Article> listArticles = new ArrayList<>();
 
-        InputStream inputStream = this.getHttpStream(flux);
+        InputStream inputStream = this.getHttpStream(flux.getUrl());
 
-        if(inputStream != null) {
+        if (inputStream != null) {
 
             Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputStream);
             NodeList nodeList = document.getElementsByTagName(Constant.DOM_ELEMENT_ITEM);
@@ -83,19 +85,19 @@ public class RssServiceImpl implements RssService {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                listArticles.add(new Article(title, url, date));
+                listArticles.add(new Article(title, url, date, flux));
             }
 
             if (inputStream != null)
                 inputStream.close();
         }
 
-        return new Pair<String, List<Article>>(flux, listArticles);
+        return new Pair<String, List<Article>>(flux.getUrl(), listArticles);
     }
 
-    public String getAllArticlesForAllThemes(Context context, MyAdapter adapter){
+    public String getAllArticlesForAllThemes(Context context, MyAdapter adapter) {
 
-        Set<Flux> listFlux= this.getThemes(context);
+        Set<Flux> listFlux = this.getThemes(context);
 
         if (listFlux != null) {
             List<XmlAsynchronousTask> listTask = new ArrayList<>();
@@ -103,7 +105,7 @@ public class RssServiceImpl implements RssService {
             for (Flux flux : listFlux) {
                 XmlAsynchronousTask currentThread = new XmlAsynchronousTask(adapter);
                 listTask.add(currentThread);
-                AsyncTaskCompat.executeParallel(currentThread, flux.getUrl());
+                AsyncTaskCompat.executeParallel(currentThread, flux);
             }
 
             for (XmlAsynchronousTask xmlAsynchronousTask : listTask) {
@@ -124,7 +126,7 @@ public class RssServiceImpl implements RssService {
 
         Set<Flux> listFlux = this.getThemes(context);
 
-        if(listFlux == null){
+        if (listFlux == null) {
             listFlux = new HashSet<>();
         }
 
@@ -134,7 +136,7 @@ public class RssServiceImpl implements RssService {
     }
 
     @Override
-    public void deleteThemes( Context context, Set<Flux> themesToDelete) {
+    public void deleteThemes(Context context, Set<Flux> themesToDelete) {
         Set<Flux> listFlux = this.getThemes(context);
 
         listFlux.removeAll(themesToDelete);
@@ -142,7 +144,7 @@ public class RssServiceImpl implements RssService {
         this.saveThemes(context, listFlux);
     }
 
-    public Set<Flux> getThemes (Context context){
+    public Set<Flux> getThemes(Context context) {
         SharedPreferences userPreference = context.getSharedPreferences(Constant.PREFERENCE_FILE_KEY, 0);
         String jsonFlux = userPreference.getString(Constant.KEY_THEME, null);
 
@@ -150,7 +152,7 @@ public class RssServiceImpl implements RssService {
 
         Flux[] tableFlux = gson.fromJson(jsonFlux, Flux[].class);
 
-        return tableFlux == null ||tableFlux.length == 0 ? null : new HashSet<Flux>(Arrays.asList(tableFlux));
+        return tableFlux == null || tableFlux.length == 0 ? null : new HashSet<Flux>(Arrays.asList(tableFlux));
     }
 
     @Override
@@ -158,7 +160,7 @@ public class RssServiceImpl implements RssService {
 
         Set<Article> listFavorite = this.getFavorites(context);
 
-        if(listFavorite == null){
+        if (listFavorite == null) {
             listFavorite = new HashSet<>();
         }
 
@@ -168,7 +170,7 @@ public class RssServiceImpl implements RssService {
     }
 
     @Override
-    public void deleteFavorite( Context context, Article articleToRemove) {
+    public void deleteFavorite(Context context, Article articleToRemove) {
         Set<Article> listFavorite = this.getFavorites(context);
 
         listFavorite.remove(articleToRemove);
@@ -176,7 +178,7 @@ public class RssServiceImpl implements RssService {
         this.saveFavorites(context, listFavorite);
     }
 
-    public Set<Article> getFavorites (Context context){
+    public Set<Article> getFavorites(Context context) {
         SharedPreferences userPreference = context.getSharedPreferences(Constant.PREFERENCE_FILE_KEY, 0);
         String jsonFavorite = userPreference.getString(Constant.KEY_FAVORIS, null);
 
@@ -184,10 +186,10 @@ public class RssServiceImpl implements RssService {
 
         Article[] tableArticle = gson.fromJson(jsonFavorite, Article[].class);
 
-        return tableArticle == null ||tableArticle.length == 0 ? null : new HashSet<Article>(Arrays.asList(tableArticle));
+        return tableArticle == null || tableArticle.length == 0 ? null : new HashSet<Article>(Arrays.asList(tableArticle));
     }
 
-    private void saveThemes (Context context, Set<Flux> fluxToSave){
+    private void saveThemes(Context context, Set<Flux> fluxToSave) {
         SharedPreferences userPreference = context.getSharedPreferences(Constant.PREFERENCE_FILE_KEY, 0);
 
         Gson gson = new Gson();
@@ -195,7 +197,7 @@ public class RssServiceImpl implements RssService {
         userPreference.edit().putString(Constant.KEY_THEME, jsonFlux).commit();
     }
 
-    private void saveFavorites (Context context, Set<Article> favoriteToSave){
+    private void saveFavorites(Context context, Set<Article> favoriteToSave) {
         SharedPreferences userPreference = context.getSharedPreferences(Constant.PREFERENCE_FILE_KEY, 0);
 
         Gson gson = new Gson();
@@ -203,10 +205,10 @@ public class RssServiceImpl implements RssService {
         userPreference.edit().putString(Constant.KEY_FAVORIS, jsonFavorite).commit();
     }
 
-    private InputStream getHttpStream(String urlName) throws IOException{
+    private InputStream getHttpStream(String urlName) throws IOException {
 
-            URL url = new URL(urlName);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            return connection.getInputStream();
+        URL url = new URL(urlName);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        return connection.getInputStream();
     }
 }
