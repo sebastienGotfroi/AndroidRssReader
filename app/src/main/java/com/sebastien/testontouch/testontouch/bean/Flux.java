@@ -17,13 +17,10 @@ public class Flux implements Serializable{
     private String alias;
     private Category category;
 
-    public Flux (){
-        this.category = new Category("Autre", Color.parseColor("#75890093"), Color.parseColor("#890093"));
-    }
-
     public Flux (String url, String alias, Category category){
         this.url = url;
         this.alias = alias;
+        this.category = category;
     }
 
     public String displayFlux (){

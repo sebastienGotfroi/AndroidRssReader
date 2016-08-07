@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.sebastien.testontouch.R;
 import com.sebastien.testontouch.testontouch.URLLoader;
 import com.sebastien.testontouch.testontouch.bean.Article;
+import com.sebastien.testontouch.testontouch.bean.Category;
 import com.sebastien.testontouch.testontouch.service.impl.RssServiceImpl;
 
 import java.util.List;
@@ -104,6 +105,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             DrawableContainerState drawableContainerState = (DrawableContainerState) background.getConstantState();
             Drawable[] children = drawableContainerState.getChildren();
             GradientDrawable notPressedDrawable = (GradientDrawable) children[1];
+
+            if(currentArticle.getFlux().getCategory() == null || currentArticle.getFlux().getCategory().getStartColor()== null) {
+                if(currentArticle.getFlux().getCategory() == null){
+                    currentArticle.getFlux().setCategory(new Category("Autre"));
+                }
+                currentArticle.getFlux().getCategory().setStartColor(R.color.transparentDarkBlue);
+                currentArticle.getFlux().getCategory().setEndColorId(R.color.darkBlue);
+            }
+
             notPressedDrawable.setColors(new int[]{currentArticle.getFlux().getCategory().getStartColor(), currentArticle.getFlux().getCategory().getEndColor()});
 
             if(currentArticle.getFavorite()){

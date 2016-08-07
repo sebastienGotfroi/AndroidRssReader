@@ -10,10 +10,18 @@ public class Category {
     private Integer startColor;
     private Integer endColor;
 
-    public Category(String name, Integer startColor, Integer endColor){
+    public Category(String name){
         this.name = name;
+    }
+
+    public Category(String name, Integer startColor, Integer endColor){
+        this(name);
         this.startColor = startColor;
         this.endColor = endColor;
+    }
+
+    public String toString(){
+        return name;
     }
 
     public String getName() {

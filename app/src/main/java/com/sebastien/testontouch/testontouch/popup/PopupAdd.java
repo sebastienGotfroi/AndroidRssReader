@@ -47,6 +47,30 @@ public class PopupAdd extends AlertDialog {
         editTextAlias = (EditText) findViewById(R.id.editText_alias);
         spinnerCategory = (Spinner) findViewById(R.id.spinner_category);
 
+        spinnerCategory.setAdapter(new SpinnerCategoryAdapter(initCategory(), spinnerCategory.getContext()));
+
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
+
+        buttonOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Flux newFLux = new Flux(editTextUrl.getText().toString(), editTextAlias.getText().toString(), (Category) spinnerCategory.getSelectedItem());
+                RssServiceImpl.getRssService().addNewTheme(newFLux, getContext());
+
+                if(listArticleAbstractFragment.getClass().equals(MainFragment.class)) {
+                    ((MainFragment)listArticleAbstractFragment).refreshListOfArticles();
+                }
+                dismiss();
+            }
+        });
+    }
+
+    private List<Category> initCategory(){
         List<Category> listCategory = new ArrayList<>();
         String[] listStringCategory  = spinnerCategory.getResources().getStringArray(R.array.category);
 
@@ -66,28 +90,6 @@ public class PopupAdd extends AlertDialog {
                 ContextCompat.getColor(spinnerCategory.getContext(),R.color.transparentDarkBlue),
                 ContextCompat.getColor(spinnerCategory.getContext(), R.color.darkBlue)));
 
-        spinnerCategory.setAdapter(new SpinnerCategoryAdapter(listCategory, spinnerCategory.getContext()));
-
-        buttonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dismiss();
-            }
-        });
-
-        buttonOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Flux newFLux = new Flux(editTextUrl.getText().toString(), editTextAlias.getText().toString(), new Category("Techonologie",
-                        ContextCompat.getColor(spinnerCategory.getContext(),R.color.transparentYellow),
-                        ContextCompat.getColor(spinnerCategory.getContext(), R.color.yellow)));
-                RssServiceImpl.getRssService().addNewTheme(newFLux, getContext());
-
-                if(listArticleAbstractFragment.getClass().equals(MainFragment.class)) {
-                    ((MainFragment)listArticleAbstractFragment).refreshListOfArticles();
-                }
-                dismiss();
-            }
-        });
+        return listCategory;
     }
 }
