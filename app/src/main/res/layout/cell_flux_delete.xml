@@ -6,7 +6,8 @@
     <CheckBox
         android:id="@+id/checkbox_delete"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"/>
 
     <TextView
         android:id="@+id/flux_delete"
@@ -15,6 +16,7 @@
         android:layout_toRightOf="@id/checkbox_delete"
         android:layout_margin="5dp"
         android:padding="5dp"
+        android:textSize="18dp"
         />
 
 
