@@ -31,6 +31,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textView_alias"/>
 
+    <Spinner
+        android:id="@+id/spinner_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editText_alias"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        >
+    </Spinner>
+
     <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
