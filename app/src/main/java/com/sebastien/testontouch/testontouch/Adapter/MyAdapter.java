@@ -104,7 +104,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             DrawableContainerState drawableContainerState = (DrawableContainerState) background.getConstantState();
             Drawable[] children = drawableContainerState.getChildren();
             GradientDrawable notPressedDrawable = (GradientDrawable) children[1];
-            notPressedDrawable.setColors(new int[]{Color.parseColor(currentArticle.getCategory().getStartColor()), Color.parseColor(currentArticle.getCategory().getEndColor())});
+            notPressedDrawable.setColors(new int[]{currentArticle.getFlux().getCategory().getStartColor(), currentArticle.getFlux().getCategory().getEndColor()});
 
             if(currentArticle.getFavorite()){
                 iconFavorite.setImageDrawable(itemView.getResources().getDrawable(android.R.drawable.btn_star_big_on, null));

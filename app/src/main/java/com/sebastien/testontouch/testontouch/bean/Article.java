@@ -13,14 +13,14 @@ public class Article implements Comparable {
     private String articleLink;
     private Date pubDate;
     private Boolean isFavorite;
-    private Category category;
+    private Flux flux;
 
-    public Article(String title, String articleLink, Date pubDate) {
+    public Article(String title, String articleLink, Date pubDate, Flux flux) {
         this.title = title;
         this.articleLink = articleLink;
         this.pubDate = pubDate;
         isFavorite = false;
-        category = new Category();
+        this.flux = flux;
     }
 
     @Override
@@ -72,11 +72,11 @@ public class Article implements Comparable {
         isFavorite = favorite;
     }
 
-    public Category getCategory() {
-        return category;
+    public Flux getFlux() {
+        return flux;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setFlux(Flux flux) {
+        this.flux = flux;
     }
 }

@@ -7,12 +7,13 @@ import android.graphics.Color;
  */
 public class Category {
     private String name;
-    private String startColor;
-    private String endColor;
+    private Integer startColor;
+    private Integer endColor;
 
-    public Category(){
-        startColor = "#75009A24";
-        endColor = "#009A24";
+    public Category(String name, Integer startColor, Integer endColor){
+        this.name = name;
+        this.startColor = startColor;
+        this.endColor = endColor;
     }
 
     public String getName() {
@@ -23,19 +24,19 @@ public class Category {
         this.name = name;
     }
 
-    public String getStartColor() {
+    public Integer getStartColor() {
         return startColor;
     }
 
-    public void setStartColor(String startColor) {
+    public void setStartColor(Integer startColor) {
         this.startColor = startColor;
     }
 
-    public String getEndColor() {
+    public Integer getEndColor() {
         return endColor;
     }
 
-    public void setEndColorId(String endColor) {
+    public void setEndColorId(Integer endColor) {
         this.endColor = endColor;
     }
 }

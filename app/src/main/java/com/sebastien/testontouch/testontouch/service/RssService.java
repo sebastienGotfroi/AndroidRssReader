@@ -21,7 +21,7 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public interface RssService {
 
-    public Pair<String, List<Article>> getAllArticle (String flux) throws MalformedURLException, IOException, ParserConfigurationException, SAXException;
+    public Pair<String, List<Article>> getAllArticle (Flux flux) throws MalformedURLException, IOException, ParserConfigurationException, SAXException;
     public void addNewTheme (Flux newFlux, Context context);
     public void deleteThemes ( Context context, Set<Flux> themesToDelete);
     public Set<Flux> getThemes (Context context);

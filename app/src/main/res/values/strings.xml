@@ -14,10 +14,11 @@
     <string name="title_deleteFlux">Suppression de flux RSS</string>
 
     <!-- Category -->
-    <string name="categoryTechnology">Technologie</string>
-    <string name="categoryNews">Actualité</string>
-    <string name="categorySports">Sports</string>
-    <string name="categoryKitchen">Cuisine</string>
-    <string name="categoryOther">Autre</string>
-
+    <string-array name="category">
+        <item name="categoryTechnology">Technologie</item>
+        <item name="categoryNews">Actualité</item>
+        <item name="categorySports">Sports</item>
+        <item name="categoryCooking">Cuisine</item>
+        <item name="categoryOther">Autre</item>
+    </string-array>
 </resources>

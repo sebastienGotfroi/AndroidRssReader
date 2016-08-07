@@ -13,6 +13,8 @@
                 android:centerX="0.5"
                 android:centerY="0.5"
                 android:gradientRadius="400dp"
+                android:startColor="@color/transparentGreen"
+                android:endColor="@color/green"
                 android:type="radial" />
             <corners
                 android:radius="8dp" />

@@ -2,6 +2,7 @@ package com.sebastien.testontouch.testontouch.service.impl;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.os.AsyncTaskCompat;
 import android.util.Pair;
 
@@ -10,6 +11,7 @@ import com.sebastien.testontouch.testontouch.Constant;
 import com.sebastien.testontouch.testontouch.adapter.MyAdapter;
 import com.sebastien.testontouch.testontouch.XmlAsynchronousTask;
 import com.sebastien.testontouch.testontouch.bean.Article;
+import com.sebastien.testontouch.testontouch.bean.Category;
 import com.sebastien.testontouch.testontouch.bean.Flux;
 import com.sebastien.testontouch.testontouch.service.RssService;
 import com.google.gson.Gson;
@@ -53,11 +55,11 @@ public class RssServiceImpl implements RssService {
     }
 
     @Override
-    public Pair<String, List<Article>> getAllArticle(String flux) throws MalformedURLException, IOException, ParserConfigurationException, SAXException {
+    public Pair<String, List<Article>> getAllArticle(Flux flux) throws MalformedURLException, IOException, ParserConfigurationException, SAXException {
 
         List<Article> listArticles = new ArrayList<>();
 
-        InputStream inputStream = this.getHttpStream(flux);
+        InputStream inputStream = this.getHttpStream(flux.getUrl());
 
         if (inputStream != null) {
 
@@ -83,14 +85,14 @@ public class RssServiceImpl implements RssService {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                listArticles.add(new Article(title, url, date));
+                listArticles.add(new Article(title, url, date, flux));
             }
 
             if (inputStream != null)
                 inputStream.close();
         }
 
-        return new Pair<String, List<Article>>(flux, listArticles);
+        return new Pair<String, List<Article>>(flux.getUrl(), listArticles);
     }
 
     public String getAllArticlesForAllThemes(Context context, MyAdapter adapter) {
@@ -103,7 +105,7 @@ public class RssServiceImpl implements RssService {
             for (Flux flux : listFlux) {
                 XmlAsynchronousTask currentThread = new XmlAsynchronousTask(adapter);
                 listTask.add(currentThread);
-                AsyncTaskCompat.executeParallel(currentThread, flux.getUrl());
+                AsyncTaskCompat.executeParallel(currentThread, flux);
             }
 
             for (XmlAsynchronousTask xmlAsynchronousTask : listTask) {
