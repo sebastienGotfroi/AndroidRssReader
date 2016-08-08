@@ -69,23 +69,31 @@ public class RssServiceImpl implements RssService {
             String title;
             String url;
             String pubDate;
+            SimpleDateFormat sdt = new SimpleDateFormat(Constant.DOM_ELEMENT_PUBDATE_FORMAT, Locale.ENGLISH);
+            SimpleDateFormat sdtSecond = new SimpleDateFormat(Constant.DOM_ELEMENT_PUBDATE_FORMAT_SECOND, Locale.ENGLISH);
 
             for (int i = 0; i < nodeList.getLength(); i++) {
 
                 Element element = (Element) nodeList.item(i);
 
                 title = element.getElementsByTagName(Constant.DOM_ELEMENT_TITLE).item(0).getTextContent();
-                url = element.getElementsByTagName(Constant.DOM_ELEMENT_URL).item(0).getTextContent();
+
+                if(element.getElementsByTagName(Constant.DOM_ELEMENT_LINK).item(0) != null) {
+                    url = element.getElementsByTagName(Constant.DOM_ELEMENT_LINK).item(0).getTextContent();
+                }
+                else {
+                    url = element.getElementsByTagName(Constant.DOM_ELEMENT_GUID).item(0).getTextContent();
+                }
+
                 pubDate = element.getElementsByTagName(Constant.DOM_ELEMENT_PUBDATE).item(0).getTextContent();
-                SimpleDateFormat sdt = new SimpleDateFormat(Constant.DOM_ELEMENT_PUBDATE_FORMAT, Locale.ENGLISH);
                 Date date = null;
 
                 try {
                     date = sdt.parse(pubDate);
+                    listArticles.add(new Article(title, url, date, flux));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                listArticles.add(new Article(title, url, date, flux));
             }
 
             if (inputStream != null)

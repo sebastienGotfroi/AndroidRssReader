@@ -8,9 +8,11 @@ public class Constant {
     public static final String PARAM_LINK = "link";
     public static final String DOM_ELEMENT_ITEM = "item";
     public static final String DOM_ELEMENT_TITLE = "title";
-    public static final String DOM_ELEMENT_URL= "link";
+    public static final String DOM_ELEMENT_LINK= "link";
+    public static final String DOM_ELEMENT_GUID= "guid";
     public static final String DOM_ELEMENT_PUBDATE = "pubDate";
     public static final String DOM_ELEMENT_PUBDATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss zzz";
+    public static final String DOM_ELEMENT_PUBDATE_FORMAT_SECOND = "EEE, dd MMM yyyy HH:mm:ss";
 
     public static final String FAVORITE_ON = "favoriteOn";
     public static final String FAVORITE_OFF = "favoriteOff";
